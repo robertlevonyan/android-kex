@@ -49,7 +49,7 @@ Add following line of code to your module(app) level gradle file
 
 ### Activity extensions
 
-```
+```java
   /* Replace a fragment in container, optional parameters
     addToBackStack (default value is false)
     backStackName (default value is "")
