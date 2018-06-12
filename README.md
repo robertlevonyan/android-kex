@@ -253,9 +253,9 @@ Add following line of code to your module(app) level gradle file
    editText.afterTextChanged { editable -> ... }
    editText.beforTextChanged { charSequence, start, count, after -> ... }
    editText.onTextChanged { charSequence, start, before, count -> ... }
-   editText.focus()                                                         // focus on this EditText
-   editText.requestFocusAndKeyboard()                                       // focus and open keyboard
-   editText.clearFocusAndKeyboard()                                         // remove focus and close keyboard
+   editText.focus()                                                      // focus on this EditText
+   editText.requestFocusAndKeyboard()                                    // focus and open keyboard
+   editText.clearFocusAndKeyboard()                                      // remove focus and close keyboard
    
    val textView = ...
    
@@ -331,4 +331,77 @@ Add following line of code to your module(app) level gradle file
    
    bottomSheetBehavior.onSlide { bottomSheetView, slideOffset -> ... }
    bottomSheetBehavior.onStateChanged { bottomSheetView, newState -> ... }
+```
+
+### Dynamic layout extensions
+
+```kotlin
+   //Creating a spinner without using adapter explicitely
+   val spinner = ...
+   
+   spinner.create(
+      R.layout.spinner_item,
+      R.id.text_view_id,
+      items,                                    // array or mutable list
+      onItemSelected = { item, postion -> ... }
+   )
+   
+   val autoCompleteTextView = ...
+   
+   autoCompleteTextView.create(
+      R.layout.auto_complete_text_item,
+      R.id.text_view_id,
+      items,                                    // array or mutable list
+      onItemSelected = { textString, postion -> ... }
+   )
+   
+   val listView = ...
+   
+   listView.create(
+      R.layout.list_item,
+      items,                                    // array or mutable list
+      creator = { item, position -> ... },      // write to list binding logic inside this lambda
+      itemClick = { item, position -> ... },
+      itemLongClick = { item, position -> ... }
+   )
+   
+   val recyclerView = ...
+   
+   recyclerView.create(
+      R.layout.recycler_list_item,
+      items,                                    // array or mutable list
+      linearLayoutManager,                      // or some other layout manager
+      creator = { item, position -> ... },      // write to list binding logic inside this lambda
+      itemClick = { item, position -> ... },
+      itemLongClick = { item, position -> ... },
+      onScrollTop = { ... },
+      onScrollBottom = { ... }
+   )
+   
+   recyclerView.createTypedList(
+      mapOf(type1 to R.layout.type1, ...),
+      items,                                    // array or mutable list
+      linearLayoutManager,                      // or some other layout manager
+      itemTypes = { position -> ... }           // declare types of items
+      creator = { item, position -> ... },      // write to list binding logic inside this lambda
+      itemClick = { item, position -> ... },
+      itemLongClick = { item, position -> ... },
+      onScrollTop = { ... },
+      onScrollBottom = { ... }
+   )
+   
+   recyclerView.addItem(item)
+   recyclerView.updateItem(item, position)
+   recyclerView.removeItem(position)
+   
+   val viewPager = ...
+   
+   viewPager.createFragmentPager(
+      items,                                    // array or mutable list of Fragments
+      supportFragmentManager
+   )
+   
+   viewPager.onPageScrollStateChanged { state -> ... }
+   viewPager.onPageScrolled { position, positionOffset, positionOffsetPixels -> ... }
+   viewPager.onPageSelected { position -> ... }
 ```
