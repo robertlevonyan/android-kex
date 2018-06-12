@@ -336,7 +336,7 @@ Add following line of code to your module(app) level gradle file
 ### Dynamic layout extensions
 
 ```kotlin
-   //Creating a spinner without using adapter explicitely
+   //Creating a spinner with single function
    val spinner = ...
    
    spinner.create(
@@ -346,6 +346,7 @@ Add following line of code to your module(app) level gradle file
       onItemSelected = { item, postion -> ... }
    )
    
+   //Creating an AutoCompleteTextView with single function
    val autoCompleteTextView = ...
    
    autoCompleteTextView.create(
@@ -355,6 +356,7 @@ Add following line of code to your module(app) level gradle file
       onItemSelected = { textString, postion -> ... }
    )
    
+   //Creating a ListView with single function
    val listView = ...
    
    listView.create(
@@ -365,6 +367,7 @@ Add following line of code to your module(app) level gradle file
       itemLongClick = { item, position -> ... }
    )
    
+   //Creating a RecyclerView with single function
    val recyclerView = ...
    
    recyclerView.create(
@@ -378,6 +381,7 @@ Add following line of code to your module(app) level gradle file
       onScrollBottom = { ... }
    )
    
+   //Creating a typed RecyclerView with single function
    recyclerView.createTypedList(
       mapOf(type1 to R.layout.type1, ...),
       items,                                    // array or mutable list
@@ -394,6 +398,7 @@ Add following line of code to your module(app) level gradle file
    recyclerView.updateItem(item, position)
    recyclerView.removeItem(position)
    
+   //Creating a ViewPager with single function
    val viewPager = ...
    
    viewPager.createFragmentPager(
