@@ -186,7 +186,7 @@ Add following line of code to your module(app) level gradle file
 ```kotlin
   val list = ...
   
-  val randomItem = list.randomItem()                                        // Get random item from any List
+  val randomItem = list.randomItem()                        // Get random item from any List
 ```
 
 ### Calendar extensions
@@ -245,3 +245,90 @@ Add following line of code to your module(app) level gradle file
    imageView set uri
 ```
 
+### Text extensions
+
+```kotlin
+   val editText = ...
+   
+   editText.afterTextChanged { editable -> ... }
+   editText.beforTextChanged { charSequence, start, count, after -> ... }
+   editText.onTextChanged { charSequence, start, before, count -> ... }
+   editText.focus()                                                         // focus on this EditText
+   editText.requestFocusAndKeyboard()                                       // focus and open keyboard
+   editText.clearFocusAndKeyboard()                                         // remove focus and close keyboard
+   
+   val textView = ...
+   
+   textView set R.string.some_text_resource
+   textView set someString
+   textView set someSpannable
+```
+
+### View extensions
+
+```kotlin
+   val view = ...
+   
+   view.dismissKeyboard()
+   
+   /* Create snackbar on view, optional parameters
+       duration (default value is Snackbar.LENGTH_SHORT)
+       actionName (default value is ")
+       actionTextColor (default value is 0)
+       action (default value is {})
+   */
+   view.snackbar(someStringMessage)
+   view.snackbar(R.string.some_message_res)
+   
+   /*Animate different properties of view, optional parameters
+       duration (default value is 300)
+       repeatCount (default value is 0)
+       repeatMode (default value is 0)
+   */
+   view.animateTranslationX(floatArrayOf( ... ))
+   view.animateTranslationY(floatArrayOf( ... ))
+   view.animateTranslationZ(floatArrayOf( ... ))            // API 21+
+   view.animateScaleX(floatArrayOf( ... ))
+   view.animateScaleY(floatArrayOf( ... ))
+   view.animateAlpha(floatArrayOf( ... ))
+   view.animateRotation(floatArrayOf( ... ))
+   view.animateRotationX(floatArrayOf( ... ))
+   view.animateRotationY(floatArrayOf( ... ))
+   view.animateX(floatArrayOf( ... ))
+   view.animateY(floatArrayOf( ... ))
+   view.animateZ(floatArrayOf( ... ))                       // API 21+
+   
+   
+   val animator = view.translationXAnimator(floatArrayOf( ... ))
+   val animator = view.translationYAnimator(floatArrayOf( ... ))
+   val animator = view.translationZAnimator(floatArrayOf( ... ))            // API 21+
+   val animator = view.scaleXAnimator(floatArrayOf( ... ))
+   val animator = view.scaleYAnimator(floatArrayOf( ... ))
+   val animator = view.alphaAnimator(floatArrayOf( ... ))
+   val animator = view.rotationAnimator(floatArrayOf( ... ))
+   val animator = view.rotationXAnimator(floatArrayOf( ... ))
+   val animator = view.rotationYAnimator(floatArrayOf( ... ))
+   val animator = view.xAnimator(floatArrayOf( ... ))
+   val animator = view.yAnimator(floatArrayOf( ... ))
+   val animator = view.zAnimator(floatArrayOf( ... ))                       // API 21+
+   
+   view width 150                           // set view width
+   view hesght 100                          // set view height
+   
+   val linearLayout = ...                   // or some other layout
+   
+   linearLayout inflate R.layout.some_layout_to_inflate
+   
+   val progressBar = ...
+   
+   progressBar.loaderColor(colorInt)
+   
+   val checkBox = ...                       // or some other compund button
+   
+   checkBox.onChecked { view, isChecked -> ... }
+   
+   val bottomSheetBehavior = ...
+   
+   bottomSheetBehavior.onSlide { bottomSheetView, slideOffset -> ... }
+   bottomSheetBehavior.onStateChanged { bottomSheetView, newState -> ... }
+```
