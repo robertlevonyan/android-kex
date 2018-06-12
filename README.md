@@ -11,17 +11,17 @@
 
 Add following line of code to your module(app) level gradle file
 
-```
-    implementation 'com.robertlevonyan.view:AndroidKEx:1.1.0'
+```groovy
+    implementation 'com.robertlevonyan.view:AndroidKEx:1.1.1'
 ```
 
 #### Maven:
 
-```
+```xml
   <dependency>
     <groupId>com.robertlevonyan.components</groupId>
     <artifactId>AndroidKEx</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <type>pom</type>
   </dependency>
 ```
@@ -30,8 +30,8 @@ Add following line of code to your module(app) level gradle file
 
 ### Context extensions
 
-```
-  // This extensions are also work in Fragments
+```kotlin
+  // This extensions are also work in Activities, Fragments, Dialogs and DialogFragments
   
   val myColor = color(R.color.my_color_res)                     // get any color from your recources
   val myString = string(R.string.my_string_res)                 // get any String from your recources
@@ -65,4 +65,183 @@ Add following line of code to your module(app) level gradle file
     outAnimationRes (default value is 0)
   */
   addFragment(fragment, R.id.container)
+  
+  /* Start new activity, optional parameters
+    extras (default value is Bundle())
+    overrideTransitions (default value is false)
+    enterAnimation (default value is 0)
+    exitAnimation (default value is 0)
+  */
+  startActivity(activityToOpen)
+  
+  /* Start new activity for result, optional parameters
+    extras (default value is Bundle())
+    overrideTransitions (default value is false)
+    enterAnimation (default value is 0)
+    exitAnimation (default value is 0)
+  */
+  startActivityForResult(activityToOpen, requestCode)
+  
+  /* Start new activity with transitions, optional parameter
+    extras (default value is Bundle())
+  */
+  startActivityWithTransitions(activityToOpen, options)
+  
+  /* Start new activity for result with transitions, optional parameter
+    extras (default value is Bundle())
+  */
+  startActivityForResultWithTransitions(activityToOpen, requestCode, options)
+  
+  /* Start new activity for result with transitions, optional parameter
+    requestCode (default value is 0)
+    extras (default value is Bundle())
+  */
+  startActivityFromFragmentWithTransitions(activityToOpen, fragmentFrom, options)
+  
+  /* Start new activity for result with transitions, optional parameter
+    extras (default value is Bundle())
+  */
+  startActivityFromFragmentWithResult(activityToOpen, fragmentFrom, requestCode)
+  
+  // Works on API19+
+  makeTranslucentStatusBar()
+  
+  // Works on API23+
+  lightStatusBar()
+  
+  // Works on API19+, removes the previous
+  makeNormalStatusBar()
+  
+  // Works on API19+
+  makeTranslucentNavigationBar()
+  
+  // Works on API26+
+  lightNavigation()
+  
+  // Works on API19+, removes the previous
+  makeNormalNavigationBar()
 ```
+
+### Fragment extensions
+
+```kotlin
+  /* Start new activity for result from fragment, optional parameters
+    extras (default value is Bundle())
+    overrideTransitions (default value is false)
+    enterAnimation (default value is 0)
+    exitAnimation (default value is 0)
+  */
+  startActivityForResult(activityToOpen, requestCode)
+  
+  /* Start new activity for result with transitions, optional parameter
+    extras (default value is Bundle())
+  */
+  startActivityFromFragmentWithResult(activityToOpen, fragmentFrom, requestCode)
+ 
+```
+
+### Animator extensions
+
+```kotlin
+  val animator = ValueAnimator.ofFloat(1f, 10f)
+  
+  animator.onStart { ... }
+  animator.onEnd { ... }
+  animator.onCancel { ... }
+  animator.onRepeat { ... }
+  animator.onResume { ... }                                 // API 19+
+  animator.onPause { ... }                                  // API 19+
+  
+  animator.addListener(
+    { /* onStart */},
+    { /* onEnd */},
+    { /* onCancel */},
+    { /* onRepeat */},
+  )
+  
+  animator.addPauseListener(
+    { /* onResume */ },
+    { /* onPause */ }
+  )
+  
+  val transition = Explode()
+  
+  transition.onTransitionStart { ... }
+  transition.onTransitionEnd { ... }
+  transition.onTransitionResume { ... }
+  transition.onTransitionPause { ... }
+  transition.onTransitionCancel { ... }
+  
+  transition.addListener(
+    { /* onTransitionStart */ },
+    { /* onTransitionEnd */ },
+    { /* onTransitionResume */ },
+    { /* onTransitionPause */ },
+    { /* onTransitionCancel */ }
+  )
+```
+
+### Collections extensions
+
+```kotlin
+  val list = ...
+  
+  val randomItem = list.randomItem()                                        // Get random item from any List
+```
+
+### Calendar extensions
+
+```kotlin
+  val calendar = ...
+  
+  calendar.getDayOfWeek()
+  calendar.getDayOfMonth()
+  calendar.getDayOfWeekInMonth()
+  calendar.getDayOfYear()
+  calendar.getWeekOfMonth()
+  calendar.getHourOfDay()
+  calendar.getYear()
+  calendar.getHour()
+  calendar.getMinute()
+  calendar.getSecond()
+  calendar.getMillisecond()
+```
+
+### File extensions
+
+```kotlin
+    uri.realPath(context)
+    
+    string.toUri()
+    
+    file.toUri()
+    file.copyInputStreamToFile(inputStream)
+```
+
+### Image extensions
+
+```kotlin
+   val bitmap = ...
+   
+   bitmap.rotate(degrees)
+   bitmap.toUriJpeg(context, title, description)
+   bitmap.toUriPng(context, title, description)
+   bitmap.toUriWebp(context, title, description)
+   bitmap.makeCircle()
+   bitmap.toDrawable(context)
+   uri.toBitmap(context)
+  
+   val drawable = ...
+   
+   drawable.toBitmap()
+   uri.toDrawable(context)
+   
+   val imageView = ...
+  
+   imageView set R.drawable.image_res
+   imageView set drawable
+   imageView set bitmap
+   imageView set icon                                                       // API 23+
+   imageView set uri
+```
+
