@@ -315,9 +315,11 @@ Add following line of code to your module(app) level gradle file
    view width 150                           // set view width
    view hesght 100                          // set view height
    
-   val linearLayout = ...                   // or some other layout
+   val linearLayout = ...                   // or some other ViewGroup
    
    linearLayout inflate R.layout.some_layout_to_inflate
+   linearLayout.forEach { childView -> }
+   linearLayout.forEachIndexed { childView, index -> }
    
    val progressBar = ...
    
