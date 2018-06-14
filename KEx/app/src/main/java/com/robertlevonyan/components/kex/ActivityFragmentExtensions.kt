@@ -50,6 +50,66 @@ fun Fragment.intArray(array: Int): IntArray {
     return context!!.intArray(array)
 }
 
+fun <T> Fragment.startActivityForResult(activityTo: Class<T>, requestCode: Int,
+                                        extras: Bundle = Bundle(), overrideTransitions: Boolean = false,
+                                        enterAnim: Int = 0, exitAnim: Int = 0) {
+    val starter = Intent(activity, activityTo)
+    if (!extras.isEmpty) {
+        starter.putExtras(extras)
+    }
+    startActivityForResult(starter, requestCode)
+    if (overrideTransitions) {
+        activity!!.overridePendingTransition(enterAnim, exitAnim)
+    }
+}
+
+fun <T> Fragment.startActivityFromFragmentWithResult(activityTo: Class<T>, requestCode: Int = 0, extras: Bundle = Bundle()) {
+    val starter = Intent(activity, activityTo)
+    if (!extras.isEmpty) {
+        starter.putExtras(extras)
+    }
+
+    activity!!.startActivityFromFragment(this, starter, requestCode)
+}
+
+fun Fragment.popFragment() {
+    val fm = requireFragmentManager()
+    if (fm.backStackEntryCount == 1) return
+    fm.popBackStack()
+}
+
+fun Fragment.popFragment(name: String, flags: Int) {
+    val fm = requireFragmentManager()
+    if (fm.backStackEntryCount == 1) return
+    fm.popBackStack(name, flags)
+}
+
+fun Fragment.popFragment(id: Int, flags: Int) {
+    val fm = requireFragmentManager()
+    if (fm.backStackEntryCount == 1) return
+    fm.popBackStack(id, flags)
+}
+
+fun Fragment.removeFragment(fragment: Fragment) {
+    val ft = requireFragmentManager().beginTransaction()
+    ft.remove(fragment)
+    ft.commitNow()
+}
+
+fun Fragment.removeFragmentByTag(tag: String) {
+    val ft = requireFragmentManager().beginTransaction()
+    val fragment = requireFragmentManager().findFragmentByTag(tag)
+    ft.remove(fragment)
+    ft.commitNow()
+}
+
+fun Fragment.removeFragmentById(id: Int) {
+    val ft = requireFragmentManager().beginTransaction()
+    val fragment = requireFragmentManager().findFragmentById(id)
+    ft.remove(fragment)
+    ft.commitNow()
+}
+
 fun FragmentActivity.replaceFragment(fragment: Fragment, @IdRes container: Int,
                                      addToBackStack: Boolean = false, backStackName: String = "",
                                      @AnimRes inAnimationRes: Int = 0, @AnimRes outAnimationRes: Int = 0) {
@@ -57,20 +117,6 @@ fun FragmentActivity.replaceFragment(fragment: Fragment, @IdRes container: Int,
     if (inAnimationRes != 0 && outAnimationRes != 0) {
         ft.setCustomAnimations(inAnimationRes, outAnimationRes)
     }
-    ft.replace(container, fragment)
-
-    if (addToBackStack) {
-        ft.addToBackStack(backStackName)
-    }
-
-    ft.commit()
-}
-
-fun FragmentActivity.replaceFragmentWithAnimation(fragment: Fragment, @IdRes container: Int,
-                                                  addToBackStack: Boolean = false, backStackName: String = "",
-                                                  @AnimRes inAnimationRes: Int, @AnimRes outAnimationRes: Int) {
-    val ft = supportFragmentManager.beginTransaction()
-    ft.setCustomAnimations(inAnimationRes, outAnimationRes)
     ft.replace(container, fragment)
 
     if (addToBackStack) {
@@ -94,6 +140,44 @@ fun FragmentActivity.addFragment(fragment: Fragment, @IdRes container: Int,
     }
 
     ft.commit()
+}
+
+fun FragmentActivity.popFragment() {
+    val fm = supportFragmentManager
+    if (fm.backStackEntryCount == 0) return
+    fm.popBackStack()
+}
+
+fun FragmentActivity.popFragment(name: String, flags: Int) {
+    val fm = supportFragmentManager
+    if (fm.backStackEntryCount == 0) return
+    fm.popBackStack(name, flags)
+}
+
+fun FragmentActivity.popFragment(id: Int, flags: Int) {
+    val fm = supportFragmentManager
+    if (fm.backStackEntryCount == 0) return
+    fm.popBackStack(id, flags)
+}
+
+fun FragmentActivity.removeFragment(fragment: Fragment) {
+    val ft = supportFragmentManager.beginTransaction()
+    ft.remove(fragment)
+    ft.commitNow()
+}
+
+fun FragmentActivity.removeFragmentByTag(tag: String) {
+    val ft = supportFragmentManager.beginTransaction()
+    val fragment = supportFragmentManager.findFragmentByTag(tag)
+    ft.remove(fragment)
+    ft.commitNow()
+}
+
+fun FragmentActivity.removeFragmentById(id: Int) {
+    val ft = supportFragmentManager.beginTransaction()
+    val fragment = supportFragmentManager.findFragmentById(id)
+    ft.remove(fragment)
+    ft.commitNow()
 }
 
 fun <T> Activity.startActivity(activityTo: Class<T>, extras: Bundle = Bundle(),
@@ -122,20 +206,7 @@ fun <T> Activity.startActivityForResult(activityTo: Class<T>, requestCode: Int,
     }
 }
 
-fun <T> Fragment.startActivityForResult(activityTo: Class<T>, requestCode: Int,
-                                        extras: Bundle = Bundle(), overrideTransitions: Boolean = false,
-                                        enterAnim: Int = 0, exitAnim: Int = 0) {
-    val starter = Intent(activity, activityTo)
-    if (!extras.isEmpty) {
-        starter.putExtras(extras)
-    }
-    startActivityForResult(starter, requestCode)
-    if (overrideTransitions) {
-        activity!!.overridePendingTransition(enterAnim, exitAnim)
-    }
-}
-
-fun <T> Activity.startActivityWithTransitions(activityTo: Class<T>, extras: Bundle, options: Bundle = Bundle()) {
+fun <T> Activity.startActivityWithTransitions(activityTo: Class<T>, options: Bundle, extras: Bundle = Bundle()) {
     val starter = Intent(this, activityTo)
     if (!extras.isEmpty) {
         starter.putExtras(extras)
@@ -143,8 +214,8 @@ fun <T> Activity.startActivityWithTransitions(activityTo: Class<T>, extras: Bund
     ActivityCompat.startActivity(this, starter, options)
 }
 
-fun <T> Activity.startActivityForResultWithTransitions(activityTo: Class<T>, requestCode: Int,
-                                                       extras: Bundle = Bundle(), options: Bundle) {
+fun <T> Activity.startActivityForResultWithTransitions(activityTo: Class<T>, requestCode: Int, options: Bundle,
+                                                       extras: Bundle = Bundle()) {
     val starter = Intent(this, activityTo)
     if (!extras.isEmpty) {
         starter.putExtras(extras)
@@ -153,8 +224,8 @@ fun <T> Activity.startActivityForResultWithTransitions(activityTo: Class<T>, req
 }
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-fun <T> Activity.startActivityFromFragmentWithTransitions(fragmentFrom: android.app.Fragment, activityTo: Class<T>,
-                                                          requestCode: Int = 0, extras: Bundle = Bundle(), options: Bundle) {
+fun <T> Activity.startActivityFromFragmentWithTransitions(activityTo: Class<T>, fragmentFrom: android.app.Fragment,
+                                                          options: Bundle, requestCode: Int = 0, extras: Bundle = Bundle()) {
     val starter = Intent(this, activityTo)
     if (!extras.isEmpty) {
         starter.putExtras(extras)
@@ -162,22 +233,13 @@ fun <T> Activity.startActivityFromFragmentWithTransitions(fragmentFrom: android.
     startActivityFromFragment(fragmentFrom, starter, requestCode, options)
 }
 
-fun <T> Activity.startActivityFromFragmentWithResult(activityTo: Class<T>, fragmentFrom: android.app.Fragment, requestCode: Int = 0, extras: Bundle = Bundle()) {
+fun <T> Activity.startActivityFromFragmentWithResult(activityTo: Class<T>, fragmentFrom: android.app.Fragment, requestCode: Int, extras: Bundle = Bundle()) {
     val starter = Intent(this, activityTo)
     if (!extras.isEmpty) {
         starter.putExtras(extras)
     }
 
     startActivityFromFragment(fragmentFrom, starter, requestCode)
-}
-
-fun <T> Fragment.startActivityFromFragmentWithResult(activityTo: Class<T>, requestCode: Int = 0, extras: Bundle = Bundle()) {
-    val starter = Intent(activity, activityTo)
-    if (!extras.isEmpty) {
-        starter.putExtras(extras)
-    }
-
-    activity!!.startActivityFromFragment(this, starter, requestCode)
 }
 
 @RequiresApi(Build.VERSION_CODES.KITKAT)
