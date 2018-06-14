@@ -3,7 +3,6 @@ package com.robertlevonyan.components.kex
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Build
 import android.support.annotation.LayoutRes
 import android.support.annotation.RequiresApi
@@ -12,9 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.ProgressBar
 
-fun View.dismissKeyboard(context: Context) {
+fun View.dismissKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(windowToken, 0)
 }
@@ -307,18 +305,39 @@ fun View.zAnimator(values: FloatArray, duration: Long = 300, repeatCount: Int = 
     return animator
 }
 
-infix fun ViewGroup.inflate(@LayoutRes lyt: Int): View {
-    return LayoutInflater.from(context).inflate(lyt, this, false)
-}
-
-infix fun View.width(width: Int) {
+infix fun View.setWidth(width: Int) {
     val lp = layoutParams
     lp.width = width
     layoutParams = lp
 }
 
-infix fun View.height(height: Int) {
+infix fun View.setHeight(height: Int) {
     val lp = layoutParams
     lp.height = height
     layoutParams = lp
 }
+
+infix fun View.visible(visible: Boolean) = if (visible) {
+    visibility = View.VISIBLE
+} else {
+    visibility = View.INVISIBLE
+}
+
+infix fun ViewGroup.inflate(@LayoutRes lyt: Int) =
+        LayoutInflater.from(context).inflate(lyt, this, false)!!
+
+fun ViewGroup.forEach(action: (View) -> Unit) {
+    for (i in 0..childCount) {
+        action(getChildAt(i))
+    }
+}
+
+fun ViewGroup.forEachIndexed(action: (View, Int) -> Unit) {
+    for (i in 0..childCount) {
+        action(getChildAt(i), i)
+    }
+}
+
+fun ViewGroup.isEmpty() = childCount == 0
+
+fun ViewGroup.isNotEmpty() = !isEmpty()
