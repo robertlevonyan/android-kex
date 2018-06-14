@@ -12,7 +12,7 @@
 Add following line of code to your module(app) level gradle file
 
 ```groovy
-    implementation 'com.robertlevonyan.view:AndroidKEx:1.1.4'
+    implementation 'com.robertlevonyan.view:AndroidKEx:1.1.5'
 ```
 
 #### Maven:
@@ -21,7 +21,7 @@ Add following line of code to your module(app) level gradle file
   <dependency>
     <groupId>com.robertlevonyan.components</groupId>
     <artifactId>AndroidKEx</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.5</version>
     <type>pom</type>
   </dependency>
 ```
@@ -103,6 +103,16 @@ Add following line of code to your module(app) level gradle file
   */
   startActivityFromFragmentWithResult(activityToOpen, fragmentFrom, requestCode)
   
+  // Pop fragment in back stack
+  popFragment()
+  popFragment(name, flags)
+  popFragment(id, flags)
+  
+  //Remove fragment
+  removeFragment(fragment)
+  removeFragmentByTag(tag)
+  removeFragmentById(R.id.my_fragment_id)
+  
   // Works on API19+
   makeTranslucentStatusBar()
   
@@ -137,6 +147,16 @@ Add following line of code to your module(app) level gradle file
     extras (default value is Bundle())
   */
   startActivityFromFragmentWithResult(activityToOpen, fragmentFrom, requestCode)
+  
+  // Pop fragment in back stack
+  popFragment()
+  popFragment(name, flags)
+  popFragment(id, flags)
+  
+  //Remove fragment
+  removeFragment(fragment)
+  removeFragmentByTag(tag)
+  removeFragmentById(R.id.my_fragment_id)
  
 ```
 
@@ -314,6 +334,8 @@ Add following line of code to your module(app) level gradle file
    
    view width 150                           // set view width
    view hesght 100                          // set view height
+   
+   view visible flase                       // show or hide view
    
    val linearLayout = ...                   // or some other ViewGroup
    
