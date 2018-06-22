@@ -12,7 +12,7 @@
 Add following line of code to your module(app) level gradle file
 
 ```groovy
-    implementation 'com.robertlevonyan.view:AndroidKEx:1.1.6'
+    implementation 'com.robertlevonyan.components:AndroidKEx:1.1.6'
 ```
 
 #### Maven:
