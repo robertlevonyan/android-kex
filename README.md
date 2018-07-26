@@ -12,7 +12,7 @@
 Add following line of code to your module(app) level gradle file
 
 ```groovy
-    implementation 'com.robertlevonyan.components:AndroidKEx:1.1.6'
+    implementation 'com.robertlevonyan.components:AndroidKEx:1.1.7'
 ```
 
 #### Maven:
@@ -21,7 +21,7 @@ Add following line of code to your module(app) level gradle file
   <dependency>
     <groupId>com.robertlevonyan.components</groupId>
     <artifactId>AndroidKEx</artifactId>
-    <version>1.1.6</version>
+    <version>1.1.7</version>
     <type>pom</type>
   </dependency>
 ```
