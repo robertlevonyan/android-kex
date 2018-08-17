@@ -12,7 +12,7 @@
 Add following line of code to your module(app) level gradle file
 
 ```groovy
-    implementation 'com.robertlevonyan.components:AndroidKEx:1.1.7'
+    implementation 'com.robertlevonyan.components:AndroidKEx:1.1.8'
 ```
 
 #### Maven:
@@ -41,6 +41,8 @@ Add following line of code to your module(app) level gradle file
   val myFont = font(R.dimen.my_font_res)                        // get any font value from your recources
   val myStringArray = stringArray(R.array.my_string_array_res)  // get any string array from your recources
   val myIntArray = intArray(R.array.my_int_array_res)           // get any int array from your recources
+  val myDrawable = drawable(R.drawable.my_drawable_name)        // get any drawable from your recources
+  val myDrawable = drawable("my_drawable_name", "com.my.app")   // get any drawable from your recources by String name
   
   // Show toast with context, second parameter is optional, default value is Toast.LENGTH_SHORT
   toast("Some message", Toast.LENGTH_LONG)
