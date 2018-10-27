@@ -415,7 +415,7 @@ Add following line of code to your module(app) level gradle file
       items,                                    // array or mutable list
       linearLayoutManager,                      // or some other layout manager
       itemTypes = { position -> ... }           // declare types of items
-      creator = { item, position -> ... },      // write to list binding logic inside this lambda
+      creator = { item, position, type -> ... },      // write to list binding logic inside this lambda
       itemClick = { item, position -> ... },
       itemLongClick = { item, position -> ... },
       onScrollTop = { ... },
