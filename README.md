@@ -3,6 +3,8 @@
 | Extensions for Kotlin. Use the power of Kotlin to make your code smaller and beautiful. |<img src="https://github.com/robertlevonyan/AndroidKEx/blob/master/Pictures/kex.png?raw=true"  width="500" />|
 |----------------------------------------------------------------------------------------------|-----------|
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AndroidKEx-yellow.svg?style=flat-square)](https://android-arsenal.com/details/1/7001)
+[![API](https://img.shields.io/badge/API-14%2B-yellow.svg?style=flat-square)](https://android-arsenal.com/api?level=14)
 [ ![Download](https://api.bintray.com/packages/robertlevonyan/maven/AndroidKEx/images/download.svg) ](https://bintray.com/robertlevonyan/maven/AndroidKEx/_latestVersion)
 
 ## Setup
