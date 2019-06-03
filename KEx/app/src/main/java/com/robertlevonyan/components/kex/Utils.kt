@@ -202,11 +202,12 @@ internal class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapt
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TypedRecyclerAdapter.TypedViewHolder {
         var v: View? = null
-        layoutForType.forEach { type, layout ->
+        for (type in layoutForType.keys) {
+            val layout = layoutForType[type]
             if (type == viewType) {
                 currentType = type
-                v = parent inflate layout
-                return@forEach
+                v = parent inflate layout!!
+                break
             }
         }
         return TypedViewHolder(v)
