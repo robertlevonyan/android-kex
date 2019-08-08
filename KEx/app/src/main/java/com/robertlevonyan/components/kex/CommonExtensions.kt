@@ -1,6 +1,6 @@
 package com.robertlevonyan.components.kex
 
-import android.support.design.widget.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import android.view.View
 
 fun BottomSheetBehavior<View>.onSlide(onSlide: (View, Float) -> Unit) {

@@ -1,7 +1,7 @@
 package com.robertlevonyan.components.kex
 
 import android.content.Context
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString

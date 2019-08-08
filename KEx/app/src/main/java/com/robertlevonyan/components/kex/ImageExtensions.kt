@@ -8,8 +8,8 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.support.annotation.DrawableRes
-import android.support.annotation.RequiresApi
+import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import android.widget.ImageView
 import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
@@ -68,8 +68,8 @@ fun Bitmap.toDrawable(context: Context): Drawable {
     return BitmapDrawable(context.resources, this)
 }
 
-fun Drawable.toBitmap(): Bitmap? {
-    val bitmap: Bitmap? = if (intrinsicWidth <= 0 || intrinsicHeight <= 0) {
+fun Drawable.toBitmap(): Bitmap {
+    val bitmap: Bitmap = if (intrinsicWidth <= 0 || intrinsicHeight <= 0) {
         Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
     } else {
         Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, Bitmap.Config.ARGB_8888)

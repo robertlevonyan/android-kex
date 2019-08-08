@@ -49,7 +49,7 @@ fun Calendar.getDayOfYear(date: Date): Int {
 }
 
 fun Calendar.getDayOfYear(): Int {
-    return getYear(Date())
+    return getDayOfYear(Date())
 }
 
 fun Calendar.getWeekOfYear(date: Date): Int {
@@ -59,7 +59,7 @@ fun Calendar.getWeekOfYear(date: Date): Int {
 }
 
 fun Calendar.getWeekOfYear(): Int {
-    return getYear(Date())
+    return getWeekOfYear(Date())
 }
 
 fun Calendar.getWeekOfMonth(date: Date): Int {
@@ -69,7 +69,7 @@ fun Calendar.getWeekOfMonth(date: Date): Int {
 }
 
 fun Calendar.getWeekOfMonth(): Int {
-    return getYear(Date())
+    return getWeekOfMonth(Date())
 }
 
 fun Calendar.getHourOfDay(date: Date): Int {
@@ -79,7 +79,7 @@ fun Calendar.getHourOfDay(date: Date): Int {
 }
 
 fun Calendar.getHourOfDay(): Int {
-    return getYear(Date())
+    return getHourOfDay(Date())
 }
 
 fun Calendar.getHour(date: Date): Int {
@@ -89,7 +89,7 @@ fun Calendar.getHour(date: Date): Int {
 }
 
 fun Calendar.getHour(): Int {
-    return getYear(Date())
+    return getHour(Date())
 }
 
 fun Calendar.getMinute(date: Date): Int {
@@ -99,7 +99,7 @@ fun Calendar.getMinute(date: Date): Int {
 }
 
 fun Calendar.getMinute(): Int {
-    return getYear(Date())
+    return getMinute(Date())
 }
 
 fun Calendar.getSecond(date: Date): Int {
@@ -109,7 +109,7 @@ fun Calendar.getSecond(date: Date): Int {
 }
 
 fun Calendar.getSecond(): Int {
-    return getYear(Date())
+    return getSecond(Date())
 }
 
 fun Calendar.getMillisecond(date: Date): Int {
@@ -119,5 +119,5 @@ fun Calendar.getMillisecond(date: Date): Int {
 }
 
 fun Calendar.getMillisecond(): Int {
-    return getYear(Date())
+    return getMillisecond(Date())
 }

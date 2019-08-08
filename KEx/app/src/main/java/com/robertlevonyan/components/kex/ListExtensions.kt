@@ -1,11 +1,11 @@
 package com.robertlevonyan.components.kex
 
-import android.support.annotation.IdRes
-import android.support.annotation.LayoutRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.view.ViewPager
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.IdRes
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.viewpager.widget.ViewPager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.*
 
@@ -80,15 +80,15 @@ fun <T> ListView.create(itemLayout: Int, items: MutableList<T>, creator: View.(T
 }
 
 fun <T> RecyclerView.create(itemLayout: Int, items: Array<T>, layoutMgr: RecyclerView.LayoutManager,
-                            creator: View.(T, Int) -> Unit,
-                            itemClick: (T, Int) -> Unit = { _, _ -> },
-                            itemLongClick: (T, Int) -> Unit = { _, _ -> },
-                            onScrollTop: () -> Unit = {},
-                            onScrollBottom: () -> Unit = {}) {
+                                                         creator: View.(T, Int) -> Unit,
+                                                         itemClick: (T, Int) -> Unit = { _, _ -> },
+                                                         itemLongClick: (T, Int) -> Unit = { _, _ -> },
+                                                         onScrollTop: () -> Unit = {},
+                                                         onScrollBottom: () -> Unit = {}) {
     adapter = RecyclerAdapter(itemLayout, items, creator, itemClick, itemLongClick)
     layoutManager = layoutMgr
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             when {
                 dy < 0 -> onScrollTop()
@@ -99,15 +99,15 @@ fun <T> RecyclerView.create(itemLayout: Int, items: Array<T>, layoutMgr: Recycle
 }
 
 fun <T> RecyclerView.create(itemLayout: Int, items: MutableList<T>, layoutMgr: RecyclerView.LayoutManager,
-                            creator: View.(T, Int) -> Unit,
-                            itemClick: (T, Int) -> Unit = { _, _ -> },
-                            itemLongClick: (T, Int) -> Unit = { _, _ -> },
-                            onScrollTop: () -> Unit = {},
-                            onScrollBottom: () -> Unit = {}) {
+                                                         creator: View.(T, Int) -> Unit,
+                                                         itemClick: (T, Int) -> Unit = { _, _ -> },
+                                                         itemLongClick: (T, Int) -> Unit = { _, _ -> },
+                                                         onScrollTop: () -> Unit = {},
+                                                         onScrollBottom: () -> Unit = {}) {
     adapter = RecyclerAdapter(itemLayout, items, creator, itemClick, itemLongClick)
     layoutManager = layoutMgr
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             when {
                 dy < 0 -> onScrollTop()
@@ -118,17 +118,17 @@ fun <T> RecyclerView.create(itemLayout: Int, items: MutableList<T>, layoutMgr: R
 }
 
 fun <T> RecyclerView.createTypedList(itemLayout: Map<Int, Int>, items: Array<T>,
-                                     layoutMgr: RecyclerView.LayoutManager,
-                                     itemTypes: (position: Int) -> Int,
-                                     creator: View.(T, Int, Int) -> Unit,
-                                     itemClick: (T, Int) -> Unit = { _, _ -> },
-                                     itemLongClick: (T, Int) -> Unit = { _, _ -> },
-                                     onScrollTop: () -> Unit = {},
-                                     onScrollBottom: () -> Unit = {}) {
+                                                                  layoutMgr: RecyclerView.LayoutManager,
+                                                                  itemTypes: (position: Int) -> Int,
+                                                                  creator: View.(T, Int, Int) -> Unit,
+                                                                  itemClick: (T, Int) -> Unit = { _, _ -> },
+                                                                  itemLongClick: (T, Int) -> Unit = { _, _ -> },
+                                                                  onScrollTop: () -> Unit = {},
+                                                                  onScrollBottom: () -> Unit = {}) {
     adapter = TypedRecyclerAdapter(itemLayout, items, itemTypes, creator, itemClick, itemLongClick)
     layoutManager = layoutMgr
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             when {
                 dy < 0 -> onScrollTop()
@@ -139,17 +139,17 @@ fun <T> RecyclerView.createTypedList(itemLayout: Map<Int, Int>, items: Array<T>,
 }
 
 fun <T> RecyclerView.createTypedList(itemLayout: Map<Int, Int>, items: MutableList<T>,
-                                     layoutMgr: RecyclerView.LayoutManager,
-                                     itemTypes: (position: Int) -> Int,
-                                     creator: View.(T, Int, Int) -> Unit,
-                                     itemClick: (T, Int) -> Unit = { _, _ -> },
-                                     itemLongClick: (T, Int) -> Unit = { _, _ -> },
-                                     onScrollTop: () -> Unit = {},
-                                     onScrollBottom: () -> Unit = {}) {
+                                                                  layoutMgr: RecyclerView.LayoutManager,
+                                                                  itemTypes: (position: Int) -> Int,
+                                                                  creator: View.(T, Int, Int) -> Unit,
+                                                                  itemClick: (T, Int) -> Unit = { _, _ -> },
+                                                                  itemLongClick: (T, Int) -> Unit = { _, _ -> },
+                                                                  onScrollTop: () -> Unit = {},
+                                                                  onScrollBottom: () -> Unit = {}) {
     adapter = TypedRecyclerAdapter(itemLayout, items, itemTypes, creator, itemClick, itemLongClick)
     layoutManager = layoutMgr
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             when {
                 dy < 0 -> onScrollTop()

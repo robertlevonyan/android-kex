@@ -7,10 +7,10 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.*
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.annotation.*
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import android.view.View
 import android.view.WindowManager
 
@@ -51,8 +51,8 @@ fun Fragment.intArray(array: Int): IntArray {
 }
 
 fun <T> Fragment.startActivityForResult(activityTo: Class<T>, requestCode: Int,
-                                        extras: Bundle = Bundle(), overrideTransitions: Boolean = false,
-                                        enterAnim: Int = 0, exitAnim: Int = 0) {
+                                                              extras: Bundle = Bundle(), overrideTransitions: Boolean = false,
+                                                              enterAnim: Int = 0, exitAnim: Int = 0) {
     val starter = Intent(activity, activityTo)
     if (!extras.isEmpty) {
         starter.putExtras(extras)
@@ -98,21 +98,21 @@ fun Fragment.removeFragment(fragment: Fragment) {
 
 fun Fragment.removeFragmentByTag(tag: String) {
     val ft = requireFragmentManager().beginTransaction()
-    val fragment = requireFragmentManager().findFragmentByTag(tag)
+    val fragment = requireFragmentManager().findFragmentByTag(tag) ?: return
     ft.remove(fragment)
     ft.commitNow()
 }
 
 fun Fragment.removeFragmentById(id: Int) {
     val ft = requireFragmentManager().beginTransaction()
-    val fragment = requireFragmentManager().findFragmentById(id)
+    val fragment = requireFragmentManager().findFragmentById(id) ?: return
     ft.remove(fragment)
     ft.commitNow()
 }
 
 fun FragmentActivity.replaceFragment(fragment: Fragment, @IdRes container: Int,
-                                     addToBackStack: Boolean = false, backStackName: String = "",
-                                     @AnimRes inAnimationRes: Int = 0, @AnimRes outAnimationRes: Int = 0) {
+                                                           addToBackStack: Boolean = false, backStackName: String = "",
+                                                           @AnimRes inAnimationRes: Int = 0, @AnimRes outAnimationRes: Int = 0) {
     val ft = supportFragmentManager.beginTransaction()
     if (inAnimationRes != 0 && outAnimationRes != 0) {
         ft.setCustomAnimations(inAnimationRes, outAnimationRes)
@@ -127,8 +127,8 @@ fun FragmentActivity.replaceFragment(fragment: Fragment, @IdRes container: Int,
 }
 
 fun FragmentActivity.addFragment(fragment: Fragment, @IdRes container: Int,
-                                 addToBackStack: Boolean = false, backStackName: String = "",
-                                 @AnimRes inAnimationRes: Int = 0, @AnimRes outAnimationRes: Int = 0) {
+                                                       addToBackStack: Boolean = false, backStackName: String = "",
+                                                       @AnimRes inAnimationRes: Int = 0, @AnimRes outAnimationRes: Int = 0) {
     val ft = supportFragmentManager.beginTransaction()
     if (inAnimationRes != 0 && outAnimationRes != 0) {
         ft.setCustomAnimations(inAnimationRes, outAnimationRes)
@@ -168,14 +168,14 @@ fun FragmentActivity.removeFragment(fragment: Fragment) {
 
 fun FragmentActivity.removeFragmentByTag(tag: String) {
     val ft = supportFragmentManager.beginTransaction()
-    val fragment = supportFragmentManager.findFragmentByTag(tag)
+    val fragment = supportFragmentManager.findFragmentByTag(tag) ?: return
     ft.remove(fragment)
     ft.commitNow()
 }
 
 fun FragmentActivity.removeFragmentById(id: Int) {
     val ft = supportFragmentManager.beginTransaction()
-    val fragment = supportFragmentManager.findFragmentById(id)
+    val fragment = supportFragmentManager.findFragmentById(id) ?: return
     ft.remove(fragment)
     ft.commitNow()
 }

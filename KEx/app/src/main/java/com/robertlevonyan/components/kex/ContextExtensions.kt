@@ -3,9 +3,9 @@ package com.robertlevonyan.components.kex
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.support.annotation.*
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
+import androidx.annotation.*
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import android.widget.Toast
 
 fun Context.color(@ColorRes clr: Int): Int {
@@ -18,6 +18,11 @@ fun Context.string(@StringRes str: Int): String {
 
 fun Context.drawable(@DrawableRes drw: Int): Drawable? {
     return ContextCompat.getDrawable(this, drw)
+}
+
+fun Context.drawable(name: String, packageName: String): Drawable? {
+    val drwId = resources.getIdentifier(name, "drawable", packageName)
+    return ContextCompat.getDrawable(this, drwId)
 }
 
 fun Context.dimen(@DimenRes dmn: Int): Float {

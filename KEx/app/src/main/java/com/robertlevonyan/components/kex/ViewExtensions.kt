@@ -4,13 +4,13 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Build
-import android.support.annotation.LayoutRes
-import android.support.annotation.RequiresApi
-import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.LayoutRes
+import androidx.annotation.RequiresApi
+import com.google.android.material.snackbar.Snackbar
 
 fun View.dismissKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -18,32 +18,10 @@ fun View.dismissKeyboard() {
 }
 
 fun View.snackbar(message: Int, duration: Int = Snackbar.LENGTH_SHORT,
-                  actionName: Int = 0, actionTextColor: Int = 0, action: (View) -> Unit = {}): Snackbar {
-    val snackbar = Snackbar.make(this, message, duration)
-
-    if (actionName != 0 && action != {}) snackbar.setAction(actionName, action)
-    if (actionTextColor != 0) snackbar.setActionTextColor(actionTextColor)
-
-    snackbar.show()
-    return snackbar
-}
-
-fun View.snackbar(message: Int, duration: Int = Snackbar.LENGTH_SHORT,
                   actionName: String = "", actionTextColor: Int = 0, action: (View) -> Unit = {}): Snackbar {
     val snackbar = Snackbar.make(this, message, duration)
 
     if (actionName != "" && action != {}) snackbar.setAction(actionName, action)
-    if (actionTextColor != 0) snackbar.setActionTextColor(actionTextColor)
-
-    snackbar.show()
-    return snackbar
-}
-
-fun View.snackbar(message: String, duration: Int = Snackbar.LENGTH_SHORT,
-                  actionName: Int = 0, actionTextColor: Int = 0, action: (View) -> Unit = {}): Snackbar {
-    val snackbar = Snackbar.make(this, message, duration)
-
-    if (actionName != 0 && action != {}) snackbar.setAction(actionName, action)
     if (actionTextColor != 0) snackbar.setActionTextColor(actionTextColor)
 
     snackbar.show()
@@ -317,23 +295,25 @@ infix fun View.setHeight(height: Int) {
     layoutParams = lp
 }
 
-infix fun View.visible(visible: Boolean) = if (visible) {
-    visibility = View.VISIBLE
-} else {
-    visibility = View.INVISIBLE
+fun View.visible(visible: Boolean, goneIfInvisible: Boolean = false) {
+    visibility = if (visible) {
+        View.VISIBLE
+    } else {
+        if (goneIfInvisible) View.GONE else View.INVISIBLE
+    }
 }
 
 infix fun ViewGroup.inflate(@LayoutRes lyt: Int) =
         LayoutInflater.from(context).inflate(lyt, this, false)!!
 
 fun ViewGroup.forEach(action: (View) -> Unit) {
-    for (i in 0..childCount) {
+    for (i in 0 until childCount) {
         action(getChildAt(i))
     }
 }
 
 fun ViewGroup.forEachIndexed(action: (View, Int) -> Unit) {
-    for (i in 0..childCount) {
+    for (i in 0 until childCount) {
         action(getChildAt(i), i)
     }
 }

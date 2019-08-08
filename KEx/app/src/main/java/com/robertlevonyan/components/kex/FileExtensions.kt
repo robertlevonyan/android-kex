@@ -11,7 +11,7 @@ fun Uri.realPath(context: Context): Uri {
     val cursor = context.contentResolver.query(this, null, null, null, null)
 
     if (cursor == null) {
-        result = this.path
+        result = this.path ?: return Uri.EMPTY
     } else {
         cursor.moveToFirst()
         val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
@@ -30,7 +30,7 @@ fun File.toUri(): Uri {
 }
 
 fun Uri.toFile(): File {
-    return File(this.path)
+    return File(this.path ?: Uri.EMPTY.toString())
 }
 
 fun File.copyInputStreamToFile(inputStream: InputStream) {

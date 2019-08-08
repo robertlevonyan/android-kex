@@ -3,8 +3,8 @@ package com.robertlevonyan.components.kex
 import android.app.Dialog
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.support.annotation.*
-import android.support.v4.app.DialogFragment
+import androidx.annotation.*
+import androidx.fragment.app.DialogFragment
 
 fun Dialog.color(@ColorRes clr: Int): Int {
     return context.color(clr)

@@ -1,8 +1,8 @@
 package com.robertlevonyan.components.kex
 
 import android.animation.Animator
-import android.support.annotation.RequiresApi
-import android.support.transition.Transition
+import androidx.annotation.RequiresApi
+import androidx.transition.Transition
 
 fun Animator.addListener(
         onEnd: (Animator) -> Unit = {},

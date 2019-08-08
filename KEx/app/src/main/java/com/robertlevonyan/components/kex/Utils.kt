@@ -1,10 +1,10 @@
 package com.robertlevonyan.components.kex
 
-import android.support.annotation.LayoutRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -121,7 +121,7 @@ internal class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerAdapter.ViewHol
 
         holder.itemView.setOnClickListener { itemClick(item, position) }
         holder.itemView.setOnLongClickListener { itemLongClick(item, position);true }
-        creator(holder.itemView!!, item, position)
+        creator(holder.itemView, item, position)
     }
 
     fun addItem(item: T) {
@@ -160,7 +160,7 @@ internal class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerAdapter.ViewHol
         return item!!
     }
 
-    internal class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
+    internal class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
 
 internal class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapter.TypedViewHolder> {
@@ -200,7 +200,7 @@ internal class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapt
         this.itemLongClick = itemLongClick
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TypedRecyclerAdapter.TypedViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TypedViewHolder {
         var v: View? = null
         layoutForType.forEach { type, layout ->
             if (type == viewType) {
@@ -209,7 +209,7 @@ internal class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapt
                 return@forEach
             }
         }
-        return TypedViewHolder(v)
+        return TypedViewHolder(v ?: View(parent.context))
     }
 
     override fun getItemCount(): Int {
@@ -220,7 +220,7 @@ internal class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapt
         }
     }
 
-    override fun onBindViewHolder(holder: TypedRecyclerAdapter.TypedViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TypedViewHolder, position: Int) {
         val item = if (items == null) {
             itemsList!![position]
         } else {
@@ -230,7 +230,7 @@ internal class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapt
         holder.itemView.setOnClickListener { itemClick(item, position) }
         holder.itemView.setOnLongClickListener { itemLongClick(item, position);true }
 
-        creator(holder.itemView!!, item, position, currentType)
+        creator(holder.itemView, item, position, currentType)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -273,7 +273,7 @@ internal class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapt
         return item!!
     }
 
-    internal class TypedViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
+    internal class TypedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
 
 internal class PagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
