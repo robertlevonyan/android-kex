@@ -14,7 +14,7 @@
 Add following line of code to your module(app) level gradle file
 
 ```groovy
-    implementation 'com.robertlevonyan.components:AndroidKEx:1.1.8'
+    implementation 'com.robertlevonyan.components:AndroidKEx:2.0.0'
 ```
 
 #### Maven:
@@ -23,7 +23,7 @@ Add following line of code to your module(app) level gradle file
   <dependency>
     <groupId>com.robertlevonyan.components</groupId>
     <artifactId>AndroidKEx</artifactId>
-    <version>1.1.7</version>
+    <version>2.0.0</version>
     <type>pom</type>
   </dependency>
 ```
@@ -302,7 +302,6 @@ Add following line of code to your module(app) level gradle file
        action (default value is {})
    */
    view.snackbar(someStringMessage)
-   view.snackbar(R.string.some_message_res)
    
    /*Animate different properties of view, optional parameters
        duration (default value is 300)
