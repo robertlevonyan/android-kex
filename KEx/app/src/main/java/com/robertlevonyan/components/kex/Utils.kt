@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 
-internal class ListAdapter<out T> : BaseAdapter {
+class ListAdapter<out T> : BaseAdapter {
     @LayoutRes
     private val itemLayout: Int
     private var items: Array<T>? = null
@@ -73,7 +73,7 @@ internal class ListAdapter<out T> : BaseAdapter {
     }
 }
 
-internal class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     @LayoutRes
     private val itemLayout: Int
     private var items: Array<T>? = null
@@ -160,10 +160,10 @@ internal class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerAdapter.ViewHol
         return item!!
     }
 
-    internal class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
 }
 
-internal class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapter.TypedViewHolder> {
+class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapter.TypedViewHolder> {
     private val layoutForType: Map<Int, Int>
     private var items: Array<T>? = null
     private var itemsList: MutableList<T>? = null
@@ -274,10 +274,10 @@ internal class TypedRecyclerAdapter<T> : RecyclerView.Adapter<TypedRecyclerAdapt
         return item!!
     }
 
-    internal class TypedViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
+    class TypedViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
 }
 
-internal class PagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+class PagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
     var fragmentsList = ArrayList<Fragment>()
     var fragmentsArray: Array<Fragment>? = null
