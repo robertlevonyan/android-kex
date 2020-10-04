@@ -124,6 +124,15 @@ class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
         creator(holder.itemView!!, item, position)
     }
 
+    fun getItem(position: Int): T {
+        items?.let {
+            return it[position]
+        } ?: itemsList?.let {
+            return it[position]
+        }
+        ?: throw NullPointerException("Your list is empty")
+    }
+
     fun addItem(item: T) {
         if (itemsList == null) {
             throw NullPointerException("Your data is Array, change to List to add items dynamically")
