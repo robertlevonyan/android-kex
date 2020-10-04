@@ -139,7 +139,7 @@ class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
         }
 
         itemsList?.add(position, item)
-        notifyItemInserted(itemsList?.size!!)
+        notifyItemInserted(position)
     }
 
     fun updateItem(item: T, position: Int) = if (itemsList == null) {
