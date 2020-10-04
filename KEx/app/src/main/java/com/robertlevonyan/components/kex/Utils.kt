@@ -133,12 +133,12 @@ class RecyclerAdapter<T> : RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
         ?: throw NullPointerException("Your list is empty")
     }
 
-    fun addItem(item: T) {
+    fun addItem(item: T, position: Int = 0) {
         if (itemsList == null) {
             throw NullPointerException("Your data is Array, change to List to add items dynamically")
         }
 
-        itemsList?.add(item)
+        itemsList?.add(position, item)
         notifyItemInserted(itemsList?.size!!)
     }
 
