@@ -12,6 +12,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 
+val externalMap = mutableMapOf<View, Any>()
+
+var View.isSwipable: Boolean
+    get() = externalMap[this] as Boolean
+    set(value) {
+        externalMap[this] = value
+    }
+
 fun View.dismissKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(windowToken, 0)
